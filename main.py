@@ -10,7 +10,7 @@ app = fastapi.FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://8080-gustavodelr-herokusqlit-hk9nvydw9mj.ws-us105.gitpod.io"],
+    allow_origins=["https://api-contactos-frontend2-eee55bb0cdd1.herokuapp.com/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
