@@ -8,13 +8,9 @@ conn = sqlite3.connect("sql/contactos.db")
 
 app = fastapi.FastAPI()
 
-origins = [
-    "https://api-contactos-frontend2-eee55bb0cdd1.herokuapp.com"
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["https://8080-xbrandonmor-contactosfr-srymps5rnj7.ws-us106.gitpod.io"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
