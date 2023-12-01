@@ -21,6 +21,19 @@ class Contacto(BaseModel):
     nombre : str
     telefono : str
 
+# Rutas para las operaciones CRUD
+@app.get("/")
+async def obtener_contactos():
+    """Obtiene todos los contactos."""
+    # Consulta todos los contactos de la base de datos y los envía en un JSON
+    c = conn.cursor()
+    c.execute('SELECT * FROM contactos')
+    response = []
+    for row in c.fetchall():
+        contacto = Contacto(email=row[0], nombre=row[1], telefono=row[2])
+        response.append(contacto.dict())
+    return response
+
 @app.post("/contactos")
 async def crear_contacto(contacto: Contacto):
     """Crea un nuevo contacto."""
@@ -60,17 +73,12 @@ async def obtener_contacto(email: str):
 @app.put("/contactos/{email}")
 async def actualizar_contacto(email: str, contacto: Contacto):
     """Actualiza un contacto."""
-    # Asegúrate de que los datos cumplen con las validaciones del modelo Contacto
-    if contacto.nombre is None or contacto.telefono is None:
-        raise fastapi.HTTPException(status_code=422, detail="Nombre y teléfono son campos obligatorios")
-
     # Actualiza el contacto en la base de datos
     c = conn.cursor()
     c.execute('UPDATE contactos SET nombre = ?, telefono = ? WHERE email = ?',
               (contacto.nombre, contacto.telefono, email))
     conn.commit()
     return contacto.dict()
-
 
 @app.delete("/contactos/{email}")
 async def eliminar_contacto(email: str):
