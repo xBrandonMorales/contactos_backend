@@ -10,7 +10,7 @@ app = fastapi.FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://8000-xbrandonmor-contactosfr-srymps5rnj7.ws-us106.gitpod.io"],
+    allow_origins=["https://8080-xbrandonmor-contactosfr-srymps5rnj7.ws-us106.gitpod.io/"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
